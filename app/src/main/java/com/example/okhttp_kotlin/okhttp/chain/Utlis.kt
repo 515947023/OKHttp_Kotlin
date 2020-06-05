@@ -11,9 +11,7 @@ val VIERSION = "HTTP/1.1"
 val GRGN = "\r\n"
 val TAG = "OKHttp_Kotlin"
 
-/**
- * 线程工程
- */
+
 fun threadFactory(
     name: String,
     daemon: Boolean
@@ -21,6 +19,11 @@ fun threadFactory(
     Thread(runnable, name).apply {
         isDaemon = daemon
     }
+}
+
+fun getProtocol(request_: Request_) = run {
+    var url = URL(request_.url)
+    url.protocol
 }
 
 /**

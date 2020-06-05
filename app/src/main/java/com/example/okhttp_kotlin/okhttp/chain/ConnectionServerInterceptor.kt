@@ -7,6 +7,7 @@ import java.io.BufferedWriter
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.Socket
+import javax.net.ssl.SSLSocketFactory
 
 /**
  * 链接服务器的拦截器
@@ -17,7 +18,8 @@ class ConnectionServerInterceptor : Interceptor_ {
 
         val request_ = realInterceptorChain.request_
 
-        val socket = Socket(getHost(request_), getPort(request_))
+        val socket = if (getProtocol(request_).equals("HTTP",true)) Socket(getHost(request_), getPort(request_))
+            else SSLSocketFactory.getDefault().createSocket(getHost(request_), getPort(request_))
 
         //todo 请求
         val bufferWriter = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
