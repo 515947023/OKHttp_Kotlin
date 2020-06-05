@@ -1,28 +1,28 @@
 package com.example.okhttputils.okhttp
 
-class Request_ internal constructor(
+class RequestCustom internal constructor(
     val url:String,
     val mHeaderList: MutableMap<String, String>,
     val requestMethod:String,
-    val requestBody:RequestBody_?
+    val requestBody:RequestBodyCustom?
 ){
     open class Builder_ {
         private var url: String? = null
         private var mHeaderList = mutableMapOf<String,String>()
         private var requestMethod = "GET"
-        private var requestBody_:RequestBody_? = null
+        private var requestBody_:RequestBodyCustom? = null
 
         open fun addRequestHeader(key:String,value:String) = apply {
             this.mHeaderList[key] = value
         }
 
-        open fun post(requestBody_:RequestBody_):Builder_=apply {
+        open fun post(requestBody_:RequestBodyCustom):Builder_=apply {
             this.requestMethod = "POST"
             this.requestBody_ = requestBody_
         }
 
-        open fun build(): Request_ {
-            return Request_(
+        open fun build(): RequestCustom {
+            return RequestCustom(
                 checkNotNull(url) { "url == null" },
                 mHeaderList,
                 requestMethod,

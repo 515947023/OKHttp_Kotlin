@@ -2,7 +2,7 @@ package com.example.okhttputils.okhttp
 
 import java.net.URLEncoder
 
-class RequestBody_ {
+class RequestBodyCustom {
 
 
     var bodys =  mutableMapOf<String,String>()

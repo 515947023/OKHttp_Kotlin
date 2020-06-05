@@ -1,6 +1,6 @@
 package com.example.okhttputils.okhttp
 
-abstract class NamedRunnable_ : Runnable {
+abstract class NamedRunnableCustom : Runnable {
 
     override fun run() {
         execute()

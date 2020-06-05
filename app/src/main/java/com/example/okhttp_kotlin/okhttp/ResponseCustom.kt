@@ -1,6 +1,6 @@
 package com.example.okhttputils.okhttp
 
-class Response_() {
+class ResponseCustom() {
     var body:String? = ""
     var statusCode:Int?=null
 }

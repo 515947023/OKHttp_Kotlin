@@ -1,15 +1,15 @@
 package com.example.okhttputils.okhttp.chain
 
-import com.example.okhttputils.okhttp.Response_
+import com.example.okhttputils.okhttp.ResponseCustom
 
 
 /**
  * 请求头拦截
  */
-class RequestHeaderInterceptor : Interceptor_ {
+class RequestHeaderInterceptorCustom : InterceptorCustom {
 
-    override fun intercept(realInterceptorChain: RealInterceptorChain_): Response_ {
-        val request = realInterceptorChain.request_
+    override fun intercept(realInterceptorChainCustom: RealInterceptorChainCustom): ResponseCustom {
+        val request = realInterceptorChainCustom.request_Custom_
 
         var mHeaderList = request.mHeaderList
 
@@ -19,7 +19,7 @@ class RequestHeaderInterceptor : Interceptor_ {
             mHeaderList["Content-Type"] = TYPE
         }
 
-        return realInterceptorChain.getResponse(request)
+        return realInterceptorChainCustom.getResponse(request)
     }
 
 }

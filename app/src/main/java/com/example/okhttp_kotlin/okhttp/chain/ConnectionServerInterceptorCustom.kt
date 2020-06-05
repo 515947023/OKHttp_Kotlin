@@ -1,7 +1,7 @@
 package com.example.okhttputils.okhttp.chain
 
 import android.util.Log
-import com.example.okhttputils.okhttp.Response_
+import com.example.okhttputils.okhttp.ResponseCustom
 import java.io.BufferedReader
 import java.io.BufferedWriter
 import java.io.InputStreamReader
@@ -12,11 +12,11 @@ import javax.net.ssl.SSLSocketFactory
 /**
  * 链接服务器的拦截器
  */
-class ConnectionServerInterceptor : Interceptor_ {
+class ConnectionServerInterceptorCustom : InterceptorCustom {
 
-    override fun intercept(realInterceptorChain: RealInterceptorChain_): Response_ {
+    override fun intercept(realInterceptorChainCustom: RealInterceptorChainCustom): ResponseCustom {
 
-        val request_ = realInterceptorChain.request_
+        val request_ = realInterceptorChainCustom.request_Custom_
 
         val socket = if (getProtocol(request_).equals("HTTP",true)) Socket(getHost(request_), getPort(request_))
             else SSLSocketFactory.getDefault().createSocket(getHost(request_), getPort(request_))
@@ -35,7 +35,7 @@ class ConnectionServerInterceptor : Interceptor_ {
         //todo 响应
         val bufferReader = BufferedReader(InputStreamReader(socket.getInputStream()))
 
-        val response_ = Response_()
+        val response_ = ResponseCustom()
 
         val readLine = bufferReader.readLine()//读取首行
 
