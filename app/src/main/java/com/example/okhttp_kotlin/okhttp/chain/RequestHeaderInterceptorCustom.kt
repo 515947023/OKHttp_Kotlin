@@ -9,7 +9,7 @@ import com.example.okhttputils.okhttp.ResponseCustom
 class RequestHeaderInterceptorCustom : InterceptorCustom {
 
     override fun intercept(realInterceptorChainCustom: RealInterceptorChainCustom): ResponseCustom {
-        val request = realInterceptorChainCustom.request_Custom_
+        val request = realInterceptorChainCustom.requestCustom
 
         var mHeaderList = request.mHeaderList
 

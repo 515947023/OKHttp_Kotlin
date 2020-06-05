@@ -18,20 +18,20 @@ class RealCallCustom(
             executed = true
         }
 
-        clientCustom.dispatcher.enqueue(AsyncCall_(responseCallbackCustom))
+        clientCustom.dispatcher.enqueue(AsyncCall(responseCallbackCustom))
 
     }
 
-    inner class AsyncCall_(private val responseCallbackCustom: CallbackCustom)
+    inner class AsyncCall(private val responseCallbackCustom: CallbackCustom)
         : NamedRunnableCustom() {
 
         override fun execute() {
             var signalledCallback:Boolean = false
 
             try {
-                var response_ = getResponseWithInterceptorChain()
+                var response = getResponseWithInterceptorChain()
 
-                responseCallbackCustom.onResponse(this, response_)
+                responseCallbackCustom.onResponse(this, response)
             }catch (e:IOException){
 
             }finally {

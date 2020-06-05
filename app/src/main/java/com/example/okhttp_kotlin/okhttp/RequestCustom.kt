@@ -6,19 +6,19 @@ class RequestCustom internal constructor(
     val requestMethod:String,
     val requestBody:RequestBodyCustom?
 ){
-    open class Builder_ {
+    open class Builder {
         private var url: String? = null
         private var mHeaderList = mutableMapOf<String,String>()
         private var requestMethod = "GET"
-        private var requestBody_:RequestBodyCustom? = null
+        private var requestBody:RequestBodyCustom? = null
 
         open fun addRequestHeader(key:String,value:String) = apply {
             this.mHeaderList[key] = value
         }
 
-        open fun post(requestBody_:RequestBodyCustom):Builder_=apply {
+        open fun post(requestBody:RequestBodyCustom):Builder=apply {
             this.requestMethod = "POST"
-            this.requestBody_ = requestBody_
+            this.requestBody = requestBody
         }
 
         open fun build(): RequestCustom {
@@ -26,11 +26,11 @@ class RequestCustom internal constructor(
                 checkNotNull(url) { "url == null" },
                 mHeaderList,
                 requestMethod,
-                requestBody_
+                requestBody
             )
         }
 
-       open fun url(url:String): Builder_ =apply{
+       open fun url(url:String): Builder =apply{
             this.url = url
         }
 

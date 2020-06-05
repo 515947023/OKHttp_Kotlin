@@ -16,15 +16,15 @@ class ConnectionServerInterceptorCustom : InterceptorCustom {
 
     override fun intercept(realInterceptorChainCustom: RealInterceptorChainCustom): ResponseCustom {
 
-        val request_ = realInterceptorChainCustom.request_Custom_
+        val request = realInterceptorChainCustom.requestCustom
 
-        val socket = if (getProtocol(request_).equals("HTTP",true)) Socket(getHost(request_), getPort(request_))
-            else SSLSocketFactory.getDefault().createSocket(getHost(request_), getPort(request_))
+        val socket = if (getProtocol(request).equals("HTTP",true)) Socket(getHost(request), getPort(request))
+            else SSLSocketFactory.getDefault().createSocket(getHost(request), getPort(request))
 
         //todo 请求
         val bufferWriter = BufferedWriter(OutputStreamWriter(socket.getOutputStream()))
 
-        val requestAll = getRequestHeaderAll(request_)
+        val requestAll = getRequestHeaderAll(request)
 
         Log.d(TAG, "intercept: requestAll = \n$requestAll")
 
@@ -35,24 +35,24 @@ class ConnectionServerInterceptorCustom : InterceptorCustom {
         //todo 响应
         val bufferReader = BufferedReader(InputStreamReader(socket.getInputStream()))
 
-        val response_ = ResponseCustom()
+        val response = ResponseCustom()
 
         val readLine = bufferReader.readLine()//读取首行
 
         val str = readLine.split(" ")
-        response_.statusCode = str[1].toInt()
+        response.statusCode = str[1].toInt()
 
         var readerLine =  bufferReader.readLine()
 
         while (readerLine != null){
             if ("".equals(readerLine)){     // 读到空行了，就代表下面就是 响应体了
-                response_.body = bufferReader.readLine()
+                response.body = bufferReader.readLine()
                 break
             }
             readerLine =  bufferReader.readLine()
         }
 
-        return response_
+        return response
 
 
     }

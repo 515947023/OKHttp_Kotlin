@@ -7,5 +7,5 @@ interface CallbackCustom {
 
 
     @Throws(IOException::class)
-    fun onResponse(call: RealCallCustom.AsyncCall_, responseCustom: ResponseCustom)
+    fun onResponse(call: RealCallCustom.AsyncCall, responseCustom: ResponseCustom)
 }

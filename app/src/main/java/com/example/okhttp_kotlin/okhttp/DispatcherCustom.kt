@@ -8,14 +8,14 @@ import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.TimeUnit
 
 class DispatcherCustom {
-    private val readyAsyncCalls = ArrayDeque<RealCallCustom.AsyncCall_>()
+    private val readyAsyncCalls = ArrayDeque<RealCallCustom.AsyncCall>()
 
     /** Running asynchronous calls. Includes canceled calls that haven't finished yet. */
-    private val runningAsyncCalls = ArrayDeque<RealCallCustom.AsyncCall_>()
+    private val runningAsyncCalls = ArrayDeque<RealCallCustom.AsyncCall>()
     private val maxRequests = 64
     private val maxRequestsPerHost = 5
 
-    internal fun enqueue(call: RealCallCustom.AsyncCall_) {
+    internal fun enqueue(call: RealCallCustom.AsyncCall) {
 
         if (runningAsyncCalls.size<maxRequests && runningCallsForHost(call)<maxRequestsPerHost){
             runningAsyncCalls.add(call)
@@ -41,14 +41,15 @@ class DispatcherCustom {
         }
 
 
-    private fun runningCallsForHost(call: RealCallCustom.AsyncCall_): Int {
+    private fun runningCallsForHost(call: RealCallCustom.AsyncCall): Int {
+        //todo 懒得做处理
 //        for (runningAsyncCall in runningAsyncCalls) {
 //
 //        }
         return 1;
     }
 
-    fun finished(asyncCall_: RealCallCustom.AsyncCall_) {
+    fun finished(asyncCall_: RealCallCustom.AsyncCall) {
         if (readyAsyncCalls.size>0){
             var call_ =readyAsyncCalls.first
             readyAsyncCalls.removeFirst()

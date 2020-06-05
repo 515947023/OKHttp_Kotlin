@@ -9,26 +9,26 @@ import java.lang.AssertionError
 class RealInterceptorChainCustom(
     private val interceptorCustoms: List<InterceptorCustom>,
     private val index: Int,
-    internal val request_Custom_: RequestCustom,
-    internal val call_: RealCallCustom
+    internal val requestCustom: RequestCustom,
+    internal val call: RealCallCustom
 
-    ) :InterceptorCustom.Chain_ {
-    override fun getRequest(): RequestCustom = request_Custom_
+    ) :InterceptorCustom.Chain {
+    override fun getRequest(): RequestCustom = requestCustom
 
-    override fun getResponse(request_Custom_: RequestCustom): ResponseCustom {
+    override fun getResponse(requestCustom: RequestCustom): ResponseCustom {
         if (index >= interceptorCustoms.size){
             throw AssertionError()
         }
 
         checkNotNull(interceptorCustoms) {IOException("interceptors is empty")}
 
-        val interceptor_ = interceptorCustoms[index]
+        val interceptor = interceptorCustoms[index]
 
-        val realInterceptorChain = RealInterceptorChainCustom(interceptorCustoms,index+1,request_Custom_,call_)
+        val realInterceptorChain = RealInterceptorChainCustom(interceptorCustoms,index+1,requestCustom,call)
 
-        val response_ = interceptor_.intercept(realInterceptorChain)
+        val response = interceptor.intercept(realInterceptorChain)
 
-        return response_
+        return response
 
 
     }

@@ -9,10 +9,10 @@ interface InterceptorCustom {
     fun intercept(realInterceptorChainCustom: RealInterceptorChainCustom): ResponseCustom
 
 
-    open interface Chain_ {
+    open interface Chain {
         fun getRequest():RequestCustom
 
         @Throws(IOException::class)
-        fun getResponse(request_Custom_: RequestCustom):ResponseCustom
+        fun getResponse(requestCustom: RequestCustom):ResponseCustom
     }
 }
